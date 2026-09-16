@@ -28,7 +28,9 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # The lockfile is maintained on Windows, while Pages builds on Linux.
+        # npm install resolves the platform-specific optional binaries correctly.
+        run: npm install --ignore-scripts
 
       - name: Build static site
         run: npx next build
